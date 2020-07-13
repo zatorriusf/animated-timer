@@ -3,19 +3,36 @@ class Timer{
         this.durationInput = duration;
         this.startBtn = startBtn;
         this.pauseBtn = pauseBtn;
+        this.running = false;
 
         this.startBtn.addEventListener('click',this.start);
         this.pauseBtn.addEventListener('click',this.pause);
     }
     
     start = () => {
-        console.log(`starting the timer`);
+        if(!this.running){
+            console.log(`starting the timer`);
+            this.running = !this.running;
+            this.tick();
+            this.tickId = setInterval(this.tick,1000);
+        } else {
+            console.log(`The timer is already running`);
+        }
     }
     pause = () => {
-        console.log(`let's pause here for a second`)
+        if(this.running){
+            console.log(`let's pause here`);
+            clearInterval(this.tickId);
+            this.running = !this.running;
+        } else {
+            console.log(`cannot pause what isn't running`)
+        }
     }
     setDuration = (e) => {
 
+    }
+    tick = () =>{
+        console.log(`tick`);
     }
 }
 
