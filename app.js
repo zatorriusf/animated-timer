@@ -13,6 +13,7 @@ class Timer{
         if(!this.running){
             console.log(`starting the timer`);
             this.running = !this.running;
+            this.durationInput.disabled = true;
             this.tick();
             this.tickId = setInterval(this.tick,1000);
         } else {
@@ -22,6 +23,7 @@ class Timer{
     pause = () => {
         if(this.running){
             console.log(`let's pause here`);
+            this.durationInput.disabled = false;
             clearInterval(this.tickId);
             this.running = !this.running;
         } else {
