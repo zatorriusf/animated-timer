@@ -1,6 +1,6 @@
 class Timer{
     constructor(duration, startBtn, pauseBtn){
-        this.duration = duration;
+        this.durationInput = duration;
         this.startBtn = startBtn;
         this.pauseBtn = pauseBtn;
 
@@ -8,14 +8,14 @@ class Timer{
         this.pauseBtn.addEventListener('click',this.pause);
     }
     
-    start(){
+    start = () => {
         console.log(`starting the timer`);
     }
-    pause(){
+    pause = () => {
         console.log(`let's pause here for a second`)
     }
-    setDuration(e){
-        
+    setDuration = (e) => {
+
     }
 }
 
