@@ -1,23 +1,36 @@
 class Timer{
-    constructor(durationInput, startBtn, pauseBtn){
+    constructor(initialDuration = 60,durationInput, startBtn, pauseBtn, callbacks){
+        this.initialDuration = initialDuration
         this.durationInput = durationInput;
         this.startBtn = startBtn;
         this.pauseBtn = pauseBtn;
         this.running = false;
+        if(callbacks){
+            this.onStart = callbacks.onStart;
+            this.onTick = callbacks.onTick;
+            this.onComplete = this.onComplete;
+        }
         
 
         this.startBtn.addEventListener('click',this.start);
         this.pauseBtn.addEventListener('click',this.pause);
-        this.setDuration();
+        this.durationInput.addEventListener('keypress', (evt) =>{
+            if(evt.key === 'Enter'){
+                this.setDuration(durationInput.value);
+            }
+        });
+        this.durationInput.addEventListener('blur', (evt) =>{
+            this.setDuration(durationInput.value);
+        });
+        this.setDuration(initialDuration);
     }
     
     start = () => {
         if(!this.running){
             this.running = !this.running;
             this.durationInput.disabled = true;
-            this.setDuration(this.durationInput.value);
             this.tick();
-            this.tickId = setInterval(this.tick,1000);
+            this.tickId = setInterval(this.tick,10);
         }
     }
     pause = () => {
@@ -28,18 +41,24 @@ class Timer{
         }
     }
     setDuration = (value = 60) => {
-        this.duration = value;
+        this.initialDuration = parseFloat(value)
+        this.duration =this.initialDuration ;
         this.updateTimer();
     }
     tick = () =>{
-        this.duration -= 1;
+        this.duration -= .01;
         this.updateTimer(); 
-        if(this.duration === 0){
-            this.setDuration();
+        if(this.duration <= 0){
+            this.setDuration(this.initialDuration);
+            this.pause();
+        }
+        if(this.onTick){
+            this.onTick();
         }
     } 
 
     updateTimer(){
-        this.durationInput.value = this.duration;
+        const newTime = this.duration.toFixed(2);
+        this.durationInput.value = newTime;
     }
 }
