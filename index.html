@@ -1,20 +1,32 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css">
-    </head>
-    <body>
-        <svg height= '400' width='400'>
-            <circle
-            fill = 'transparent'
-            stroke = 'green'>
+  <head>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css"
+    />
+    
+  </head>
+  <body>
+    <main>
+      <svg height="400" width="400">
+        <defs>
+            <linearGradient id="myGradient">
+              <stop offset="5%"  stop-color="gold" />
+              <stop offset="95%" stop-color="red" />
+            </linearGradient>
+          </defs>
+        <circle fill="transparent" stroke="url(#myGradient)"></circle>
+      </svg>
+      <section class="timer">
+        <input id="duration" type="number" />
+        <button id="start"><i class="fas fa-play"></i></button>
+        <button id="pause"><i class="fas fa-pause"></i></button>
+      </section>
+    </main>
 
-            </circle>
-        </svg>
-        <input id='duration' type='number' />
-        <button id='start'><i class="fas fa-play"></i></button>
-        <button id='pause'><i class="fas fa-pause"></i></button>
-        <script src='Timer.js'></script>
-        <script src='app.js'></script>
-    </body>
+    <script src="Timer.js"></script>
+    <script src="app.js"></script>
+  </body>
 </html>
